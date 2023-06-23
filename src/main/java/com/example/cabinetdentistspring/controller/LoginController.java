@@ -4,6 +4,8 @@ import com.example.cabinetdentistspring.DTO.UserDto;
 import com.example.cabinetdentistspring.models.User;
 import com.example.cabinetdentistspring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,21 @@ public class LoginController {
     public String loginForm() {
         return "login";
     }
+
+    @RequestMapping("/Acceuil")
+    public String AcceuilForm() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userRole = authentication.getAuthorities().iterator().next().getAuthority();
+        if (userRole.equals("Secretaire")) {
+            return "Index-Secretaire";
+        } else if (userRole.equals("Medecin")) {
+            return "Index-Medecin";
+        }
+        else
+            return "redirect:/login";
+    }
+
+
 
     @GetMapping("/registration")
     public String registrationForm(Model model) {

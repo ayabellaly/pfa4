@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ApplicationController {
     @GetMapping("/")
     public String gohome() {
-        return "index";
+        return "index1";
     }
 
 

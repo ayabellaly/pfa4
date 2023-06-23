@@ -13,7 +13,7 @@ public class UserController {
 
     @GetMapping("/user")
     public String registrationForm() {
-        return "index";
+        return "index1";
     }
 
 
